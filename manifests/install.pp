@@ -10,5 +10,5 @@ class webapp::install
     'ror', 'ruby', 'ruby on rails' : { notice("Ruby on Rails still not supported.") }
     default: { notice("${$::webapp::language} not supported.") }
   }
-  #contain ::webapp::vcs::${::webapp::vcs}::install
+
 }
