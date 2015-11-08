@@ -1,0 +1,33 @@
+{
+  "author" : "Jascha Casadio",
+  "dependencies" : [
+    {
+      "name" : "puppetlabs-stdlib",
+      "version_requirement" : ">= 2.2.1 <= 4.9.0"
+    }
+  ],
+  "description": "This module is responsible to setup self-deploying web applications. It does support both static (pure HTML/CSS) and dynamic (PHP, Python and Ruby on Rails) applications.",
+  "issues_url": "https://github.com/jaschac/puppet-webapp/issues",
+  "license": "Apache-2.0",
+  "name": "lostinmalloc-webapp",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "7",
+        "8" 
+      ]
+    }   
+  ],
+  "project_page": "https://github.com/jaschac/puppet-webapp",
+  "requirements": [
+    {   
+      "name": "puppet",
+      "version_requirement": ">=4.0.0 <5.0.0"
+    }
+  ],
+  "source": "https://github.com/jaschac/puppet-webapp",
+  "summary": "Setup self-deploying Django/PHP/Python web applications.",
+  "tags":["django", "fpm", "nginx", "php", "python", "ror", "ruby", "ruby on rails", "web application"],
+  "version": "0.0.1"
+}
