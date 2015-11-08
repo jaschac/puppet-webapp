@@ -1,0 +1,6 @@
+# Defines a web application
+class webapp
+  (
+) inherits ::webapp::params {
+  contain ::webapp::install
+}
