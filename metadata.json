@@ -29,5 +29,5 @@
   "source": "https://github.com/jaschac/puppet-webapp",
   "summary": "Setup self-deploying Django/PHP/Python web applications.",
   "tags":["django", "fpm", "nginx", "php", "python", "ror", "ruby", "ruby on rails", "web application"],
-  "version": "0.0.9"
+  "version": "0.0.10"
 }
