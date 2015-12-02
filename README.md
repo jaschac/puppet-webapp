@@ -28,6 +28,7 @@ This module is responsible to setup self-deploying web applications. It does sup
 
 #### What the Module Does Not
  - The module does neither install nor manage the web server used to serve a web application. If, for example, a web application is to be served through Nginx, then the node must have a module that takes care of both its installation and general configuration (workers, ...).
+   - In the case of Nginx, for example, it is responsibility of the client to make sure that Apache is not running. The Apache webserver, which is a dependency of PHP-FPM, for example, does bind, by default, to port 80 and is automatically started, so that in the case of a PHP-FPM web application deployed on Nginx, the client should take care of this.
  - The module does not handle the remote repository that hosts a web application's code. The remote is expected to exist and be available. An SSH deployment key must be provided to lostinmalloc-webapp to pull.
  - The module does not install nor configure any database used by the web application. It does expect the user that owns the web application to exist and have the proper permissions.
 

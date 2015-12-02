@@ -28,7 +28,7 @@ class webapp::config(
     case $webapp_config['ws']['engine']{
     
       'nginx': {
-        ::webapp::ws::nginx::config{webapp_name:
+        ::webapp::ws::nginx::config{$webapp_name:
           ws => {
             template      => $webapp_config['ws']['template'],
             template_args => $webapp_config['ws']['template_args']
