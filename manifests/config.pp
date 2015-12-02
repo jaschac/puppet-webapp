@@ -24,6 +24,22 @@ class webapp::config(
       }
     }
 
+    # Apply web server specific configuration
+    case $webapp_config['ws']['engine']{
+    
+      'nginx': {
+        ::webapp::ws::nginx::config{webapp_name:
+          ws => {
+            template      => $webapp_config['ws']['template'],
+            template_args => $webapp_config['ws']['template_args']
+          }
+        }
+      }
+
+      default: {
+        notice("${webapp_config['ws']['engine']} not supported, yet.")
+      }
+    }
 
   }
 }
