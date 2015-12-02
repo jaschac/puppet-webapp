@@ -7,30 +7,39 @@ class webapp::service(
     # Manage language service
     case $webapp_config['language'] {
 
-      'django', 'python' : {
+      'django', 'python': {
         notice("Python still not supported.")
       }
 
-      'php' : {
+      'php': {
         contain ::webapp::languages::php::service
       }
 
-      'ror', 'ruby', 'ruby on rails' : {
+      'ror', 'ruby', 'ruby on rails': {
         notice("Ruby on Rails still not supported.")
       }
 
       default: {
         notice("${webapp_config['language']} not supported.")
       }
+
     }
+
 
     # Manage web server service
     case $webapp_config['ws']['engine'] {
       
+      'nginx': {
+        contain ::webapp::ws::nginx::service
+      }
+
       default: {
         notice("${webapp_config['ws']['engine']} not supported, yet.")
       }
+
     }
+
+
   }
   
 }
