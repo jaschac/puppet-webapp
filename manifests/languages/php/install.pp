@@ -3,7 +3,7 @@ class webapp::languages::php::install(
 ) inherits ::webapp::languages::php::params
 {
 
-  $language_dependencies.each |$dependency,$provider| {
+  $language_mandatory_dependencies.each |$dependency,$provider| {
     if !defined(Package[$dependency]){
       Package{ $dependency:
         ensure   => present,

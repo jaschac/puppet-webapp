@@ -2,7 +2,7 @@
 class webapp::languages::php::params(
 ){
   
-  $language_dependencies = { 
+  $language_mandatory_dependencies = { 
     php5       => 'apt',
     php5-curl  => 'apt',
     php5-fpm   => 'apt',
