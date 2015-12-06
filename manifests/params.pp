@@ -5,9 +5,15 @@ class webapp::params
       Hash[
         String,
 	Struct[{
-          language => Enum['html', 'php', 'python'],
-	  vcs      => Enum['git'],
-	  ws       => Struct[{
+          extra_dependencies => Optional[
+            Hash[
+              String[1, default],
+              String[1, default]
+              ]
+            ],
+          language           => Enum['html', 'php', 'python'],
+	  vcs                => Enum['git'],
+	  ws                 => Struct[{
 	    engine        => Enum['apache', 'nginx'],
 	    template      => Enum['php-fpm'],
 	    template_args => Struct[{

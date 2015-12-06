@@ -32,6 +32,20 @@ class webapp::install
         notice("${webapp_config['ws']['engine']} not supported, yet.")
       }
     }
+
+    # Install extra dependencies
+    if !empty($webapp_config['extra_dependencies']){
+      $webapp_config['extra_dependencies'].each |$dependency,$provider| {
+        if !defined(Package[$dependency]){
+          Package{ $dependency:
+            ensure   => present,
+            provider => $provider,
+            tag      => 'extra_dependency',
+          }
+        }
+      }
+    }
+
   }
 
 }
