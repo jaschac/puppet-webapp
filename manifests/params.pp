@@ -12,7 +12,10 @@ class webapp::params
               ]
             ],
           language           => Enum['html', 'php', 'python'],
-	  vcs                => Enum['git'],
+	  vcs                => Struct[{
+            deployment_key => String[1, default],
+            engine         => Enum['git']
+          }],
 	  ws                 => Struct[{
 	    engine        => Enum['apache', 'nginx'],
 	    template      => Enum['php-fpm'],
