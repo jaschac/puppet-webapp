@@ -1,8 +1,6 @@
 #
 # PHP-FPM Nginx's server configuration
 #
-# For each web application I send in template_args aliased as args
-#
 
 server {
 	index index.php index.html index.htm;
