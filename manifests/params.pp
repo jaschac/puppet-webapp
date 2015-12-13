@@ -11,7 +11,15 @@ class webapp::params
               String[1, default]
               ]
             ],
-          language           => Enum['html', 'php', 'python'],
+          language           => Struct[{
+            engine          => Enum['html', 'php', 'python', 'ruby'],
+            limits          => Optional[
+              Struct[{
+                max_size_post   => Optional[String[1, default]],
+                max_size_upload => Optional[String[1, default]]
+              }]
+            ]
+          }],
 	  vcs                => Struct[{
             deployment_key => String[1, default],
             engine         => Enum['git']

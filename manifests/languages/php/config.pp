@@ -1,6 +1,16 @@
-# PHP specific configuration
-class webapp::languages::php::config(
-) inherits ::webapp::languages::php::params
+# Configure PHP specific parameters
+define webapp::languages::php::config(
+  Optional[
+    Struct[{
+      max_size_post   => Optional[String[1, default]],
+      max_size_upload => Optional[String[1, default]]
+    }]
+  ] $limits
+)
 {
-  notice('PHP configuration.')
+  file { '/etc/php5/fpm/php.ini':
+    ensure  => file,
+    content => epp('webapp/languages/php/php.ini.epp', {'limits' => $limits})
+  } 
+
 }

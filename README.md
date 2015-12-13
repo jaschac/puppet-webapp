@@ -4,20 +4,25 @@
 2. [Module Description](#module-description)
     * [What the Module Does](#what-the-module-does)
     * [What the Module Does Not](#what-the-module-does-not)
-    * [Supported Languages and Frameworks](#supported-languages-and-frameworks)
-    * [Supported Web Servers](#supported-web-servers)
-    * [Supported Version Control Systems](#supported-version-control-systems)
 3. [Setup](#setup)
     * [Requirements](#requirements)
 4. [Usage](#usage)
 5. [Reference](#reference)
+    * [Languages](#languages)
+      * [PHP](#php)
+    * [Version Control Systems](#languages)
+    * [Web Servers](#languages)
 6. [Limitations](#limitations)
+    * [Supported Languages and Frameworks](#supported-languages-and-frameworks)
+    * [Supported Web Servers](#supported-web-servers)
+    * [Supported Version Control Systems](#supported-version-control-systems)
 7. [Development](#development)
 
 ## Overview
-This module is responsible to setup self-deploying web applications. It does support both static (pure HTML/CSS) and dynamic (PHP, Python and Ruby on Rails) applications. It takes advantage of the many new features introduced by Puppet 4, so that it is not backwards compatible. lostinmalloc-webapp is distributed through the Apache License 2.0. Please do refer to the LICENSE for details. 
+`lostinmalloc-webapp` is responsible to **setup self-deploying web applications**. It does support both static (pure HTML/CSS) and dynamic (PHP, Python and Ruby on Rails) applications. It takes advantage of the many new features introduced by Puppet 4, so that it is not backwards compatible. `lostinmalloc-webapp` is distributed through the Apache License 2.0. Please do refer to the LICENSE for details. 
 
 ## Module Description
+@TODO
 
 #### What the Module Does
  - The module does take care to provide a configuration file specific to the web server used to serve its content. If, for example, a web application is served through Nginx, then lostinmalloc-webapp will deploy, at an arbitrary location, a vhost configuration file compliant with Nginx.'s expectations.
@@ -32,32 +37,10 @@ This module is responsible to setup self-deploying web applications. It does sup
  - The module does not handle the remote repository that hosts a web application's code. The remote is expected to exist and be available. An SSH deployment key must be provided to lostinmalloc-webapp to pull.
  - The module does not install nor configure any database used by the web application. It does expect the user that owns the web application to exist and have the proper permissions.
 
-#### Supported Languages and Frameworks
-The lostinmalloc-webapp supports the following languages and frameworks:
-
- - Pure HTML/CSS/Boostrap static websites
- - PHP
- - Python
- - Ruby on Rails
-
-#### Supported Web Servers
-The lostinmalloc-webapp supports the following web servers:
-
- - Apache
- - Nginx
-
-#### Supported Version Control Systems
-lostinmalloc-webapp supports the following version control systems:
-
- - Git
- - Mercurial
- - Subversion
-
 ## Setup
-lostinmalloc-webapp can be installed in different ways.
+`lostinmalloc-webapp` can be installed in different ways.
 
 #### Installing the module from the Puppet Forge
-
 In order to install this module, run the following command:
 
 ```bash
@@ -65,42 +48,67 @@ In order to install this module, run the following command:
 ```
 
 #### Getting the source code from Git Hub
-
 @TODO
 
 #### Requirements
-
 @TODO
 
 ## Usage
-The lostinmalloc-webapp module does expect all the data from Hiera. Everything is retrieved through data binding.
+The `lostinmalloc-webapp` module does expect all the data from Hiera.
 
 @TODO
 
 ## Reference
-
 @TODO
 
+### Languages
+
+#### PHP
+Optionally, the client can change the upload limits. This is important if we plan to use some web application such as `WordPress`. Changing these limits results in the `php.ini` file to get the following entries modified:
+
+  - `upload_max_filesize`
+  - `post_max_size`
+
+Note that, in order for this to work, the web server must also be properly configured. For example, on `Nginx` we must set `client_max_body_size` in the HTTP block. As aforementioned, `lostinmalloc-webapp` is not responsible of the web server itself, so that the client must make sure that it is.
 
 ## Limitations
+This module has been developed and tested on the following setup(s):
 
-@TODO
+  - Operating Systems:
+    - Debian 7 Wheezy (3.2.68-1+deb7u3 x86_64)
+    - Debian 8 Jessie (3.16.7-ckt11-1+deb8u3 x86_64)
+  - Puppet
+    - 4.2.1
+  - Hiera
+    - 3.0.1
+  - Facter
+    - 2.4.4
+  - Ruby
+    - 2.1.6p336
+
+#### Supported Languages and Frameworks
+The `lostinmalloc-webapp` supports the following languages and frameworks:
+
+ - Pure HTML/CSS/Boostrap static websites
+ - PHP
+ - Python
+ - Ruby on Rails
+
+#### Supported Web Servers
+The `lostinmalloc-webapp` supports the following web servers:
+
+ - Apache
+ - Nginx
+
+#### Supported Version Control Systems
+`lostinmalloc-webapp` supports the following version control systems:
+
+ - Git
+ - Mercurial
+ - Subversion
 
 ## Development
-The lostinmalloc-webapp module is being actively developed. As functionality is added and tested, it will be cherry-picked into the master branch. This README file will be promptly updated as that happens.
+The `lostinmalloc-webapp` module is being actively developed. As functionality is added and tested, it will be cherry-picked into the master branch. This README file will be promptly updated as that happens.
 
 You can contact me through the official page of this module: https://github.com/jaschac/puppet-webapp. Please do report any bug and suggest new features/improvements.
 
-This module has been developed and tested on the following setup(s):
-
-  * *Operating Systems*:
-    * Debian 7 Wheezy (3.2.68-1+deb7u3 x86_64)
-    * Debian 8 Jessie (3.16.7-ckt11-1+deb8u3 x86_64)
-  * *Puppet*
-    * 4.2.1
-  * *Hiera*
-    * 3.0.1
-  * *Facter*
-    * 2.4.4
-  * *Ruby*
-    * 2.1.6p336

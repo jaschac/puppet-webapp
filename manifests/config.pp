@@ -5,17 +5,22 @@ class webapp::config(
   $::webapp::webapps.each|$webapp_name, $webapp_config|{
 
     # Apply  language specific configuration
-    case $webapp_config['language'] {
-      
-      'django', 'python' : {
-         notice("Python still not supported.")
-       }
+    case $webapp_config['language']['engine'] {
       
       'php' : {
-         contain ::webapp::languages::php::config
-       }
+        ::webapp::languages::php::config { $webapp_name:
+          limits => empty($webapp_config['language']['limits']) ? {
+            false  => $webapp_config['language']['limits'],
+            true   => {}
+          }     
+        }
+      }
+
+      'python' : { 
+        notice("Python still not supported.")
+      }
       
-      'ror', 'ruby', 'ruby on rails' : {
+      'ruby' : {
         notice("Ruby on Rails still not supported.")
       }
       
@@ -28,7 +33,7 @@ class webapp::config(
     case $webapp_config['ws']['engine']{
     
       'nginx': {
-        ::webapp::ws::nginx::config{$webapp_name:
+        ::webapp::ws::nginx::config { $webapp_name:
           ws => {
             template      => $webapp_config['ws']['template'],
             template_args => $webapp_config['ws']['template_args']

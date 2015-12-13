@@ -6,17 +6,21 @@ class webapp::install
   $::webapp::webapps.each|$webapp_name, $webapp_config|{
     
     # Install language dependencies
-    case $webapp_config['language'] {
+    case $webapp_config['language']['engine'] {
 
-      'django', 'python' : {
-        notice("Python still not supported.")
+      'html' : {
+        notice("HTML still not supported.")
       }
 
       'php' : {
         contain ::webapp::languages::php::install
       }
 
-      'ror', 'ruby', 'ruby on rails' : {
+      'python' : { 
+        notice("Python still not supported.")
+      }
+
+      'ruby' : {
         notice("Ruby on Rails still not supported.")
       }
       

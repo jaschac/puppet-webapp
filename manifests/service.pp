@@ -5,7 +5,7 @@ class webapp::service(
   $::webapp::webapps.each|$webapp_name, $webapp_config|{
   
     # Manage language service
-    case $webapp_config['language'] {
+    case $webapp_config['language']['engine'] {
 
       'django', 'python': {
         notice("Python still not supported.")
