@@ -6,12 +6,14 @@
     * [What the Module Does Not](#what-the-module-does-not)
 3. [Setup](#setup)
     * [Requirements](#requirements)
+    * [Secrets](#secrets)
 4. [Usage](#usage)
 5. [Reference](#reference)
     * [Languages](#languages)
       * [PHP](#php)
     * [Version Control Systems](#languages)
     * [Web Servers](#languages)
+      * [Nginx](#nginx)
 6. [Limitations](#limitations)
     * [Supported Languages and Frameworks](#supported-languages-and-frameworks)
     * [Supported Web Servers](#supported-web-servers)
@@ -50,8 +52,14 @@ In order to install this module, run the following command:
 #### Getting the source code from Git Hub
 @TODO
 
+#### Secrets
+The `lostinmalloc-webapp` module relies on [`hiera-eyaml`](https://github.com/TomPoulton/hiera-eyaml) to encrypt sensitive data, such as passwords and SSH private keys. Since `lostinmalloc-webapp` expects all data to be provided through Hiera, the user is expected to be able to properly install and configure Puppet so that is has both the `yaml` and the `eyaml` backends.
+
 #### Requirements
-@TODO
+The `lostinmalloc-webapp` module requires:
+
+  - **Puppet** 4.0+
+  - `hiera-yaml` 2.0.8+
 
 ## Usage
 The `lostinmalloc-webapp` module does expect all the data from Hiera.
@@ -69,7 +77,17 @@ Optionally, the client can change the upload limits. This is important if we pla
   - `upload_max_filesize`
   - `post_max_size`
 
+`lostinmalloc-webapp` checks for the presence of either of these parameters within the `PHP` block and, in case, updates the configuration file. `lostinmalloc-webapp` does not, anyway, validate the value assigned to them by the client.
+
 Note that, in order for this to work, the web server must also be properly configured. For example, on `Nginx` we must set `client_max_body_size` in the HTTP block. As aforementioned, `lostinmalloc-webapp` is not responsible of the web server itself, so that the client must make sure that it is.
+
+### Web Servers
+
+#### Nginx
+As aforementioned stated, `lostinmalloc-webapp` is not responsible neither to setup nor to configure `Nginx`. That's a responsibility of the client. Among the many details that should be taken care of are the following:
+
+  - The `default` virtual host configuration file that ships with `Nginx`, and which is usually found in `/etc/nginx/sites-enabled/` as a soft linf to `/etc/nginx/sites-available/default`, should be removed, since it is very likely going to match the incoming requests, shadowing our vhost files.
+  - If the web application allows the upload of files, then the `client_max_body_size` parameter should be properly set.
 
 ## Limitations
 This module has been developed and tested on the following setup(s):
@@ -111,4 +129,3 @@ The `lostinmalloc-webapp` supports the following web servers:
 The `lostinmalloc-webapp` module is being actively developed. As functionality is added and tested, it will be cherry-picked into the master branch. This README file will be promptly updated as that happens.
 
 You can contact me through the official page of this module: https://github.com/jaschac/puppet-webapp. Please do report any bug and suggest new features/improvements.
-
