@@ -50,6 +50,15 @@ class webapp::install
       }
     }
 
+    # Install VCS related dependencies: remote repository SSH key deployment
+    $deployment_key = try_get_value($::webapp::secrets, "${webapp_name}/vcs/deployment_key")
+    if !empty($deployment_key) and !defined(File["/.${webapp_name}_deployment_key"]){
+      File{ "/.${webapp_name}_deployment_key":
+	content => $deployment_key,
+        mode    => '0600',
+      }
+    }
+
   }
 
 }

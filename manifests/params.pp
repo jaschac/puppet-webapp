@@ -1,6 +1,20 @@
 # This class holds the webapp parameters
 class webapp::params
   (
+
+    # secrets (eYAML)
+    Optional[
+      Hash[
+        String,
+        Struct[{
+          vcs => Struct[{
+            deployment_key => Optional[String[1, default]]
+          }]
+        }]
+      ]
+    ] $secrets,
+
+    # webapps (YAML)
     Optional[
       Hash[
         String,
@@ -21,7 +35,6 @@ class webapp::params
             ]
           }],
 	  vcs                => Struct[{
-            deployment_key => String[1, default],
             engine         => Enum['git']
           }],
 	  ws                 => Struct[{
@@ -35,5 +48,5 @@ class webapp::params
 	    }]
 	}]
       ]
-    ] $webapps,
+    ] $webapps
 ){}
