@@ -40,8 +40,11 @@ class webapp::params
             group => String[1, default],
 	    name  => String[1, default]
 	  }],
-
-	  vcs                => Struct[{
+          
+          vcs                => Struct[{
+            deployment_key => Struct[{
+              location => String[1, default]
+              }],
             engine         => Enum['git']
           }],
 

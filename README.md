@@ -80,8 +80,10 @@ webapp::params::webapps:
       group: 'www-data'
       name: 'www-data'
     vcs:
+      deployment_key:
+        location: '/home/www-data/.ssh/'
       engine: 'git'
-    ws:
+    ws: 
       engine: 'nginx'
       template: 'php-fpm'
       template_args:
@@ -109,8 +111,10 @@ Here are presented the different configuration options of `lostinmalloc-webapp`.
 
   - `owner`: a hash that provides information about who owns the web application we are installing.
     - `group`: the group the user belongs to.
-    - `name`: the user that owns the web application. The **client must ensure** that:
-      1. The user exists.
+    - `name`: the user that owns the web application. The **client must ensure** that the user exists.
+  - `vcs`
+    - `deployment_key`
+      - `location`: the full PATH to the directory where the SSH private deployment key will be stored. The **client must ensure** that it exists.
 
 **eYAML**
 
