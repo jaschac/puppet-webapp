@@ -25,6 +25,7 @@ class webapp::params
               String[1, default]
               ]
             ],
+
           language           => Struct[{
             engine          => Enum['html', 'php', 'python', 'ruby'],
             limits          => Optional[
@@ -34,9 +35,16 @@ class webapp::params
               }]
             ]
           }],
+
+	  owner              => Struct[{
+            group => String[1, default],
+	    name  => String[1, default]
+	  }],
+
 	  vcs                => Struct[{
             engine         => Enum['git']
           }],
+
 	  ws                 => Struct[{
 	    engine        => Enum['apache', 'nginx'],
 	    template      => Enum['php-fpm'],

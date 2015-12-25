@@ -55,7 +55,9 @@ class webapp::install
     if !empty($deployment_key) and !defined(File["/.${webapp_name}_deployment_key"]){
       File{ "/.${webapp_name}_deployment_key":
 	content => $deployment_key,
+        group   => $webapp_config['owner']['group'],
         mode    => '0600',
+        owner   => $webapp_config['owner']['name'],
       }
     }
 

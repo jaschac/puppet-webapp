@@ -62,12 +62,60 @@ The `lostinmalloc-webapp` module requires:
   - `hiera-yaml` 2.0.8+
 
 ## Usage
-The `lostinmalloc-webapp` module does expect all the data from Hiera.
+The `lostinmalloc-webapp` module does expect all the data from Hiera. Since part of the information is sensitive, part of if must be given through `hiera-eyaml`.
 
-@TODO
+This is an example of how to configure `lostinmalloc-webapp` through `YAML` and `eYAML`.
+
+```yaml
+# hieradata/nodes/puppet.lostinmalloc.com.yaml
+---
+webapp::params::webapps:
+  foo:
+    language:
+      engine: 'php'
+      limits:
+        max_size_post: '100M'
+        max_size_upload: '100M'
+    owner:
+      group: 'www-data'
+      name: 'www-data'
+    vcs:
+      engine: 'git'
+    ws:
+      engine: 'nginx'
+      template: 'php-fpm'
+      template_args:
+        listen_port: '80'
+        root_dir: '/var/www/foo/'
+        server_name: '_'
+```
+
+```yaml
+# hieradata/secrets.eyaml
+---
+webapp::params::secrets:
+  foo:
+    vcs:
+      deployment_key: |
+        -----BEGIN RSA PRIVATE KEY-----
+        some_nice_key
+        -----END RSA PRIVATE KEY-----
+```
 
 ## Reference
-@TODO
+Here are presented the different configuration options of `lostinmalloc-webapp`.
+
+**YAML**
+
+  - `owner`: a hash that provides information about who owns the web application we are installing.
+    - `group`: the group the user belongs to.
+    - `name`: the user that owns the web application. The **client must ensure** that:
+      1. The user exists.
+
+**eYAML**
+
+  - `vcs`
+    - `deployment_key`: the private deployment SSH key used by the web application to periodically pull the source to serve from a remote repository. This key will be deployed at an arbitrary location, decided by the client, with `0600` permission. Through `owner`, the client defines who owns this key. The client is responsible to make sure that both the owner and the path where the key is stored exist.
 
 ### Languages
 
@@ -129,3 +177,4 @@ The `lostinmalloc-webapp` supports the following web servers:
 The `lostinmalloc-webapp` module is being actively developed. As functionality is added and tested, it will be cherry-picked into the master branch. This README file will be promptly updated as that happens.
 
 You can contact me through the official page of this module: https://github.com/jaschac/puppet-webapp. Please do report any bug and suggest new features/improvements.
+
