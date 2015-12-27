@@ -19,6 +19,7 @@
     * [Supported Web Servers](#supported-web-servers)
     * [Supported Version Control Systems](#supported-version-control-systems)
 7. [Development](#development)
+8. [Contact](#contact)
 
 ## Overview
 `lostinmalloc-webapp` is responsible to **setup self-deploying web applications**. It does support both static (pure HTML/CSS) and dynamic (PHP, Python and Ruby on Rails) applications. It takes advantage of the many new features introduced by Puppet 4, so that it is not backwards compatible. `lostinmalloc-webapp` is distributed through the Apache License 2.0. Please do refer to the LICENSE for details. 
@@ -178,7 +179,13 @@ The `lostinmalloc-webapp` supports the following web servers:
  - Subversion
 
 ## Development
-The `lostinmalloc-webapp` module is being actively developed. As functionality is added and tested, it will be cherry-picked into the master branch. This README file will be promptly updated as that happens.
+The `lostinmalloc-webapp`` module is being actively developed. As functionality is added and tested, it will be cherry-picked into the master branch. This README file will be promptly updated as that happens.
 
-You can contact me through the official page of this module: https://github.com/jaschac/puppet-webapp. Please do report any bug and suggest new features/improvements.
+## Contact
+Therea re several ways to get in touch with me:
 
+  - [Linkedin](https://es.linkedin.com/in/jaschacasadio)
+  - [GitHub](https://github.com/jaschac/puppet-webapp)
+  - [Puppet Forge](https://forge.puppetlabs.com/lostinmalloc)
+
+Please do report any bug and suggest new features/improvements.
