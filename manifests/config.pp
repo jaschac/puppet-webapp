@@ -17,15 +17,15 @@ class webapp::config(
       }
 
       'python' : { 
-        notice("Python still not supported.")
+        notice("Python not supported, yet.")
       }
       
       'ruby' : {
-        notice("Ruby on Rails still not supported.")
+        notice("Ruby on Rails not supported, yet.")
       }
       
       default: {
-        notice("${webapp_config['language']} not supported.")
+        notice("${webapp_config['language']} not supported, yet.")
       }
     }
 
@@ -45,6 +45,16 @@ class webapp::config(
         notice("${webapp_config['ws']['engine']} not supported, yet.")
       }
     }
+    
+    # Apply VCS specific configuration
+    case $webapp_config['vcs']['engine']{
+    
+      'git' : {}
 
+      default: {
+        notice("${webapp_config['vcs']} not supported, yet.")
+      }
+
+    }
   }
 }

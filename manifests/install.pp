@@ -9,7 +9,7 @@ class webapp::install
     case $webapp_config['language']['engine'] {
 
       'html' : {
-        notice("HTML still not supported.")
+        notice("HTML not supported, yet.")
       }
 
       'php' : {
@@ -17,15 +17,15 @@ class webapp::install
       }
 
       'python' : { 
-        notice("Python still not supported.")
+        notice("Python not supported, yet.")
       }
 
       'ruby' : {
-        notice("Ruby on Rails still not supported.")
+        notice("Ruby on Rails not supported, yet.")
       }
       
-      default: {
-        notice("${webapp_config['language']} not supported.")
+      default : {
+        notice("${webapp_config['language']} not supported, yet.")
       }
 
     }
@@ -60,6 +60,18 @@ class webapp::install
         owner   => $webapp_config['owner']['name'],
         path    => "${webapp_config['vcs']['deployment_key']['location']}/${webapp_name}_deployment_key",
       }
+    }
+    
+    # Install language dependencies
+    case $webapp_config['vcs']['engine'] {
+      
+      'git' : {
+        contain ::webapp::vcs::git::install
+        }
+      
+      default : {
+        notice("${webapp_config['vcs']} not supported, yet.")
+        }
     }
 
   }

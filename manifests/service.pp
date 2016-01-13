@@ -4,7 +4,7 @@ class webapp::service(
 
   $::webapp::webapps.each|$webapp_name, $webapp_config|{
   
-    # Manage language service
+    # Manage language service(s)
     case $webapp_config['language']['engine'] {
 
       'django', 'python': {
@@ -26,7 +26,7 @@ class webapp::service(
     }
 
 
-    # Manage web server service
+    # Manage web server service(s)
     case $webapp_config['ws']['engine'] {
       
       'nginx': {
@@ -39,6 +39,16 @@ class webapp::service(
 
     }
 
+
+    # Manage VCS service(s)
+    case $webapp_config['vcs']['engine'] {
+
+      'git' : {}
+
+      default : {
+        notice("${webapp_config['vcs']['engine']} not supported, yet.")
+      }
+    }
 
   }
   
