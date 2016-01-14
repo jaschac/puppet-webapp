@@ -4,6 +4,10 @@
     {
       "name" : "puppetlabs-stdlib",
       "version_requirement" : ">= 2.2.1 <= 4.9.0"
+    },
+    {
+      "name" : " puppetlabs-vcsrepo",
+      "version_requirement" : ">=1.3.2 <= 3.2.0"
     }
   ],
   "description": "This module is responsible to setup self-deploying web applications. It does support both static (pure HTML/CSS) and dynamic (PHP, Python and Ruby on Rails) applications.",
@@ -33,5 +37,5 @@
   "source": "https://github.com/jaschac/puppet-webapp",
   "summary": "Setup self-deploying Django/PHP/Python web applications.",
   "tags":["django", "fpm", "nginx", "php", "python", "ror", "ruby", "ruby on rails", "web application"],
-  "version": "0.0.23"
+  "version": "0.0.24"
 }

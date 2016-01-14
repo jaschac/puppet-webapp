@@ -45,7 +45,9 @@ class webapp::params
             deployment_key => Struct[{
               location => String[1, default]
               }],
-            engine         => Enum['git']
+            engine         => Enum['git'],
+            path           => String[1, default],
+            source         => String[1, default],
           }],
 
 	  ws                 => Struct[{

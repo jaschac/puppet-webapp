@@ -49,7 +49,15 @@ class webapp::config(
     # Apply VCS specific configuration
     case $webapp_config['vcs']['engine']{
     
-      'git' : {}
+      'git' : {
+        ::webapp::vcs::git::config { $webapp_name:
+          deployment_key_location => $webapp_config['vcs']['deployment_key']['location'],
+          group                   => $webapp_config['owner']['group'],
+          owner                   => $webapp_config['owner']['name'],
+          path                    => $webapp_config['vcs']['path'],
+          source                  => $webapp_config['vcs']['source']
+        }
+      }
 
       default: {
         notice("${webapp_config['vcs']} not supported, yet.")
