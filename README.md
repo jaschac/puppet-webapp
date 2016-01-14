@@ -84,6 +84,8 @@ webapp::params::webapps:
       deployment_key:
         location: '/home/www-data/.ssh/'
       engine: 'git'
+      path: '/var/www/foo'
+      source: 'git@bitbucket.org:username/project_name.git'
     ws: 
       engine: 'nginx'
       template: 'php-fpm'
@@ -116,6 +118,9 @@ Here are presented the different configuration options of `lostinmalloc-webapp`.
   - `vcs`
     - `deployment_key`
       - `location`: the full PATH to the directory where the SSH private deployment key will be stored. The **client must ensure** that it exists.
+    - `engine`: the type of VCS to use. At the moment, only Git is supported.
+    - `path`: The full PATH where the repository will be cloned into. This directory will be owned by `owner:group`. The `.git` subdirectory can be assigned to a different user, if needed.
+    - `source`: the repository to clone.
 
 **eYAML**
 
@@ -133,6 +138,8 @@ Optionally, the client can change the upload limits. This is important if we pla
 `lostinmalloc-webapp` checks for the presence of either of these parameters within the `PHP` block and, in case, updates the configuration file. `lostinmalloc-webapp` does not, anyway, validate the value assigned to them by the client.
 
 Note that, in order for this to work, the web server must also be properly configured. For example, on `Nginx` we must set `client_max_body_size` in the HTTP block. As aforementioned, `lostinmalloc-webapp` is not responsible of the web server itself, so that the client must make sure that it is.
+
+### Version Control Systems
 
 ### Web Servers
 
