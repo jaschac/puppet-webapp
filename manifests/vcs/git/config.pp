@@ -12,7 +12,7 @@ define webapp::vcs::git::config(
   vcsrepo { "${path}":
     ensure     => latest,
     group      => "${group}",
-    identity   => '/home/www-data/.ssh/foo_deployment_key',
+    identity   => "${deployment_key_location}${name}_deployment_key",
     provider   => git,
     require    => File["${deployment_key_location}${name}_deployment_key"],
     source     => "${source}",
