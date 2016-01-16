@@ -15,6 +15,7 @@ define webapp::vcs::git::config(
     identity   => "${deployment_key_location}${name}_deployment_key",
     provider   => git,
     require    => File["${deployment_key_location}${name}_deployment_key"],
+    revision   => 'test',
     source     => "${source}",
     user       => "${owner}",
   }
@@ -38,4 +39,12 @@ define webapp::vcs::git::config(
     require => [Vcsrepo["${path}"], File["${path}"]],
   }
 
+  # Set up a cron job to periodically pull
+  cron { "cronjob_${name}":
+    command => "eval $(ssh-agent); ssh-add ${deployment_key_location}${name}_deployment_key; cd ${path}; git pull origin test:test; chown -R ${owner}:${group} ${path}; chown -R ${owner}:${group} ${path}/.git; ssh-agent -k",
+    hour    => '*',
+    minute  => '*/10',
+    require => [Vcsrepo["${path}"], File["${path}"], File["${path}/.git"]],
+    user    => 'root',
+  }
 }
