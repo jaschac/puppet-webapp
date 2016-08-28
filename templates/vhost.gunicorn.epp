@@ -1,0 +1,19 @@
+#
+# Green Unicorn Nginx's server configuration
+#
+
+server {
+<% if $args['listen_port'] { -%>
+	listen	<%= $args['listen_port'] %>;
+<% } -%>
+<% elsif empty($args['listen_port']) { -%>
+	listen	80;
+<% } -%>
+	root <%= $args['root_dir'] %>;
+	server_name <%= $args['server_name'] %>;
+	index index.php index.html index.htm;
+        
+	location / { 
+			proxy_pass http://:<%= $args['gunicorn_ip'] %>:<%= $args['gunicorn_port'] %>;
+                      	}
+}

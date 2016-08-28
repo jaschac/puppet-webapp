@@ -1,0 +1,15 @@
+#
+# A generic Nginx's redirect configuration
+#
+
+server {
+<% if $args['listen_port'] { -%>
+        listen  <%= $args['listen_port'] %>;
+<% } -%>
+<% elsif empty($args['listen_port']) { -%>
+        listen  80;
+<% } -%>
+	server_name <%= $args['server_name'] %>;
+    	return 301 $scheme://<%= $args['redirect_url'] %>$request_uri;
+}
+

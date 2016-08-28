@@ -1,0 +1,26 @@
+#
+# PHP-FPM Nginx's server configuration
+#
+
+server {
+	index index.php index.html index.htm;
+<% if $args['listen_port'] { -%>
+	listen	<%= $args['listen_port'] %>;
+<% } -%>
+<% elsif empty($args['listen_port']) { -%>
+	listen	80;
+<% } -%>
+	root <%= $args['root_dir'] %>;
+	server_name <%= $args['server_name'] %>;
+	try_files $uri $uri/ /index.php;
+    
+	location ~ \.php$ {
+		fastcgi_split_path_info ^(.+\.php)(/.+)$; # debug
+        	include fastcgi_params;
+        	#fastcgi_param  SCRIPT_FILENAME  /<%= $args['server_name'] %>$fastcgi_script_name;
+		fastcgi_param  SCRIPT_FILENAME	$document_root$fastcgi_script_name;
+        	fastcgi_pass unix:/var/run/php5-fpm.sock;
+        	fastcgi_index index.php;
+    	}
+}
+
